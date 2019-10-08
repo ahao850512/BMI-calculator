@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="ie=edge")
+        link(rel="stylesheet" href="css/style.css")
+        link(rel="stylesheet" href="css/reset.css")
+        title BMI-calculator
+    body
+        #app
+            .top
+                .headerImg
+                    img(src="img/BMICLogo.png" alt="BMICLogo")
+                .textArea
+                    .span 身高 cm 
+                    input(type="number" class='userHeight' placeholder=' 請輸入身高')
+                    .span 體重 kg
+                    input(type="number" class='userWeight' placeholder=' 請輸入體重') 
+                .sentBtn
+                    input(type="button" class='sendBmibtn' value='看結果')
+            section.content 
+                .title BMI紀錄
+                ul.list
+            footer
+                img.footerBmiimg(src="img/BMICFooterLogo.png" alt="BMIicon")
+        script(src="js/all.js")

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <title>BMI-calculator</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="top">
+        <div class="headerImg"><img src="img/BMICLogo.png" alt="BMICLogo"/></div>
+        <div class="textArea">
+          <div class="span">身高 cm </div>
+          <input class="userHeight" type="number" placeholder=" 請輸入身高"/>
+          <div class="span">體重 kg</div>
+          <input class="userWeight" type="number" placeholder=" 請輸入體重"/>
+        </div>
+        <div class="sentBtn">
+          <input class="sendBmibtn" type="button" value="看結果"/>
+        </div>
+      </div>
+      <section class="content"> 
+        <div class="title">BMI紀錄</div>
+        <ul class="list"></ul>
+      </section>
+      <footer><img class="footerBmiimg" src="img/BMICFooterLogo.png" alt="BMIicon"/></footer>
+    </div>
+    <script src="js/all.js"></script>
+  </body>
+</html>
