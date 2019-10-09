@@ -14,11 +14,21 @@ html(lang="en")
                     img(src="img/BMICLogo.png" alt="BMICLogo")
                 .textArea
                     .span 身高 cm 
-                    input(type="number" class='userHeight' placeholder=' 請輸入身高')
+                    input(type="number" class='userHeight' placeholder=' 請輸入身高' min='0')
                     .span 體重 kg
-                    input(type="number" class='userWeight' placeholder=' 請輸入體重') 
-                .sentBtn
+                    input(type="number" class='userWeight' placeholder=' 請輸入體重' min='0') 
+                .sendBlock
                     input(type="button" class='sendBmibtn' value='看結果')
+                    .toggle 
+                        .userBmi 123 
+                        .bmiTag BMI
+                        .resetBtn
+                        
+                        
+                        
+                        
+
+
             section.content 
                 .title BMI紀錄
                 ul.list

@@ -1,8 +1,16 @@
 // DOM
 var userHeight = document.querySelector('.userHeight');
 var userWeight = document.querySelector('.userWeight');
-var sendBmibtn = document.querySelector('.sendBmibtn');
 var list = document.querySelector('.list');
+
+// 按鈕
+var sendBmibtn = document.querySelector('.sendBmibtn');
+var toggle = document.querySelector('.toggle');
+
+// 按鈕素質切換
+var userBmi = document.querySelector('.userBmi');
+var bmiTag = document.querySelector('.bmiTag');
+var resetBtn = document.querySelector('.resetBtn');
 
 // 監聽
 sendBmibtn.addEventListener('click', sendData, false)
@@ -19,6 +27,7 @@ function sendData() {
     var height = userHeight.value;
     var weight = userWeight.value;
     if (height === '' || weight === '') { return alert('請填寫身高和體重!') }
+    if (height <= 0 || weight <= 0) { return alert('請填寫正確的身高和體重!') }
     content = {
         userHeight: height,
         userWeight: weight
@@ -28,6 +37,10 @@ function sendData() {
     localStorage.setItem('info', JSON.stringify(data));
     userHeight.value = " ";
     userWeight.value = " ";
+
+    // 切換按鈕
+    sendBmibtn.style.display = 'none';
+    toggle.style.display = 'block';
 }
 
 // 更新清單
@@ -44,11 +57,13 @@ function update() {
         var bmiVal = data[i].userWeight / (userHeight * userHeight)
         //  toFixed(2) 只取小數點後兩位
         var bmi = (bmiVal.toFixed(2));
+
         // 紀錄日期
         var today = new Date();
         var year = today.getFullYear();
         var month = today.getMonth() + 1;
         var date = today.getDate();
+
 
         // 體位判斷
         if (bmi <= 15) { status = '非常嚴重的體重不足', borderColor = '#6f2fff' }
@@ -60,6 +75,14 @@ function update() {
         else if (bmi > 35 && bmi <= 40) { status = '嚴重肥胖', borderColor = '#ff6c03' }
         else { status = '非常嚴重肥胖', borderColor = '#ff1200' }
 
+        // 按鈕判定
+        toggle.style.border = "4px solid " + borderColor;
+        userBmi.textContent = bmi;
+        userBmi.style.color = borderColor;
+        bmiTag.style.color = borderColor;
+        resetBtn.style.backgroundColor = borderColor;
+
+        // 組合 html
         content = '<li class="datalist" style="border-left: 4px solid ' + borderColor + '">'
             + '<p class="status">' + status + '</p>'
             + '<p class="listText">BMI<span class="content"> ' + bmi + '</span></p>'
@@ -81,9 +104,19 @@ function delData(e) {
     var el = e.target.nodeName;
     // console.log(e.target.nodeName);
     if (el !== 'INPUT') { return };
-    var num =e.target.dataset.num;
-    data.splice(num,1);
-    localStorage.setItem('info',JSON.stringify(data));
+    var num = e.target.dataset.num;
+    data.splice(num, 1);
+    localStorage.setItem('info', JSON.stringify(data));
     update(data);
 
+}
+
+// reset 按鈕
+
+resetBtn.addEventListener('click', switchInitial, false)
+
+
+function switchInitial() {
+    sendBmibtn.style.display = 'block';
+    toggle.style.display = 'none';
 }

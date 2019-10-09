@@ -14,12 +14,17 @@
         <div class="headerImg"><img src="img/BMICLogo.png" alt="BMICLogo"/></div>
         <div class="textArea">
           <div class="span">身高 cm </div>
-          <input class="userHeight" type="number" placeholder=" 請輸入身高"/>
+          <input class="userHeight" type="number" placeholder=" 請輸入身高" min="0"/>
           <div class="span">體重 kg</div>
-          <input class="userWeight" type="number" placeholder=" 請輸入體重"/>
+          <input class="userWeight" type="number" placeholder=" 請輸入體重" min="0"/>
         </div>
-        <div class="sentBtn">
+        <div class="sendBlock">
           <input class="sendBmibtn" type="button" value="看結果"/>
+          <div class="toggle"> 
+            <div class="userBmi">123 </div>
+            <div class="bmiTag">BMI</div>
+            <div class="resetBtn"></div>
+          </div>
         </div>
       </div>
       <section class="content"> 
