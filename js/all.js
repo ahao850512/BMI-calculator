@@ -1,31 +1,31 @@
 // DOM
-var userHeight = document.querySelector('.userHeight');
-var userWeight = document.querySelector('.userWeight');
-var list = document.querySelector('.list');
+const userHeight = document.querySelector('.userHeight');
+const userWeight = document.querySelector('.userWeight');
+const list = document.querySelector('.list');
 
 // 按鈕
-var sendBmibtn = document.querySelector('.sendBmibtn');
-var toggle = document.querySelector('.toggle');
+const sendBmibtn = document.querySelector('.sendBmibtn');
+const toggle = document.querySelector('.toggle');
 
 // 按鈕素質切換
-var userBmi = document.querySelector('.userBmi');
-var bmiTag = document.querySelector('.bmiTag');
-var resetBtn = document.querySelector('.resetBtn');
+const userBmi = document.querySelector('.userBmi');
+const bmiTag = document.querySelector('.bmiTag');
+const resetBtn = document.querySelector('.resetBtn');
 
 // 監聽
 sendBmibtn.addEventListener('click', sendData, false)
 list.addEventListener('click', delData, false);
 
 // 將資料轉成物件
-var data = JSON.parse(localStorage.getItem('info')) || [];
+const data = JSON.parse(localStorage.getItem('info')) || [];
 
 // 初始渲染
 update(data);
 
 // 將資料存進 localStrage
 function sendData() {
-    var height = userHeight.value;
-    var weight = userWeight.value;
+    let height = userHeight.value;
+    let weight = userWeight.value;
     if (height === '' || weight === '') { return alert('請填寫身高和體重!') }
     if (height <= 0 || weight <= 0) { return alert('請填寫正確的身高和體重!') }
     content = {
@@ -35,8 +35,9 @@ function sendData() {
     data.push(content);
     update(data);
     localStorage.setItem('info', JSON.stringify(data));
-    userHeight.value = " ";
-    userWeight.value = " ";
+    // 查詢後清空欄位
+    userHeight.value = null;
+    userWeight.value = null;
 
     // 切換按鈕
     sendBmibtn.style.display = 'none';
@@ -45,24 +46,24 @@ function sendData() {
 
 // 更新清單
 function update() {
-    var str = '';
-    for (var i = 0; i < data.length; i++) {
+    let str = '';
+    for (let i = 0; i < data.length; i++) {
         // 身高單位轉成公尺
-        var userHeight = (data[i].userHeight / 100);
+        let userHeight = (data[i].userHeight / 100);
         // 體位狀態
-        var status = '';
+        let status = '';
         // 框線顏色
-        var borderColor = '';
+        let borderColor = '';
         // BMI 計算公式  BMI = 體重(公斤) / 身高*身高(公尺)
-        var bmiVal = data[i].userWeight / (userHeight * userHeight)
+        let bmiVal = data[i].userWeight / (userHeight * userHeight)
         //  toFixed(2) 只取小數點後兩位
-        var bmi = (bmiVal.toFixed(2));
+        let bmi = (bmiVal.toFixed(2));
 
         // 紀錄日期
-        var today = new Date();
-        var year = today.getFullYear();
-        var month = today.getMonth() + 1;
-        var date = today.getDate();
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let date = today.getDate();
 
 
         // 體位判斷
@@ -83,14 +84,15 @@ function update() {
         resetBtn.style.backgroundColor = borderColor;
 
         // 組合 html
-        content = '<li class="datalist" style="border-left: 4px solid ' + borderColor + '">'
-            + '<p class="status">' + status + '</p>'
-            + '<p class="listText">BMI<span class="content"> ' + bmi + '</span></p>'
-            + '<p class="listText">身高<span class="content"> ' + data[i].userHeight + '</span></p>'
-            + '<p class="listText">體重<span class="content"> ' + data[i].userWeight + '</span></p>'
-            + '<p class="listText">' + year + '-' + month + '-' + date + '</p>'
-            + '<input data-num="' + i + '" type="button" class="del" value="刪除">'
-            + '</li>';
+        content = `<li class="datalist" style="border-left: 4px solid   ${borderColor}  ">
+                        <p class="status">  ${status}  </p>
+                        <p class="listText">BMI<span class="content">   ${bmi}  </span></p>
+                        <p class="listText">身高<span class="content">   ${data[i].userHeight}  </span></p>
+                        <p class="listText">體重<span class="content">   ${data[i].userWeight}  </span></p>
+                        <p class="listText">  ${year}  - ${month}  -  ${date}  </p>
+                        <input data-num="  ${i}  " type="button" class="del" value="刪除">
+                    </li>`;
+
 
         str += content;
     }
@@ -101,10 +103,10 @@ function update() {
 
 // 刪除
 function delData(e) {
-    var el = e.target.nodeName;
+    let el = e.target.nodeName;
     // console.log(e.target.nodeName);
     if (el !== 'INPUT') { return };
-    var num = e.target.dataset.num;
+    let num = e.target.dataset.num;
     data.splice(num, 1);
     localStorage.setItem('info', JSON.stringify(data));
     update(data);
